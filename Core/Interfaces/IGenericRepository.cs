@@ -9,10 +9,12 @@ namespace Core.Interfaces
     {
         Task<IEnumerable<T>> ListAllAsync();
 
-         Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(int id);
          
-         Task<IEnumerable<T>> ListAsync(ISpecification<T> spec);
+        Task<IEnumerable<T>> ListAsync(ISpecification<T> spec);
 
-         Task<T> GetEntityWithSpec(ISpecification<T> spec);
+        Task<T> GetEntityWithSpec(ISpecification<T> spec);
+
+        Task<int> CountAsync(ISpecification<T> spec);
     }
 }
