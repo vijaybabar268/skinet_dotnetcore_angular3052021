@@ -30,6 +30,14 @@ namespace API
             services.AddApplicationServices();
             
             services.AddSwaggerDocumentation();
+
+            services.AddCors(opt => 
+            {
+                opt.AddPolicy("CorsPolicy", policy => 
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,12 +45,7 @@ namespace API
         {
             app.UseMiddleware<ExceptionMiddleware>();
 
-            if (env.IsDevelopment())
-            {
-                
-            }
-
-            app.UseSwaggerDocumentation();
+            if (env.IsDevelopment()){ }
 
             app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
@@ -52,7 +55,11 @@ namespace API
 
             app.UseStaticFiles();
 
+            app.UseCors("CorsPolicy");
+
             app.UseAuthorization();
+
+            app.UseSwaggerDocumentation();            
             
             app.UseEndpoints(endpoints =>
             {
