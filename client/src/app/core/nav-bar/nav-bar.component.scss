@@ -10,3 +10,12 @@
     right: 35px;
     top: -17px;
 }
+
+a{
+    text-decoration: none;
+    color: #343a40;
+    
+    &.active{
+        color: orange;
+    }
+}
