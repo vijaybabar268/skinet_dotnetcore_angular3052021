@@ -13,7 +13,7 @@ import { ShopParams } from '../shared/models/shopParams';
 
 export class ShopComponent implements OnInit {
 
-  @ViewChild('search', {static: true}) searchTerm: ElementRef | any; 
+  @ViewChild('search', {static: false}) searchTerm: ElementRef | any; 
 
   products: IProduct[] | undefined;
   brands: IBrand[] | undefined;
@@ -90,9 +90,11 @@ export class ShopComponent implements OnInit {
   }
 
   onSearch(){
-    this.shopParams.search = this.searchTerm.nativeElement.value;
-    this.shopParams.pageNumber = 1;
-    this.getProducts();
+    if(this.searchTerm.nativeElement.value){
+      this.shopParams.search = this.searchTerm.nativeElement.value;
+      this.shopParams.pageNumber = 1;
+      this.getProducts();
+    }    
   }
 
   onReset(){
